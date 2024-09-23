@@ -1,0 +1,43 @@
+{
+  "name": "your-project-name",
+  "version": "1.0.0",
+  "scripts": {
+    "serve": "vue-cli-service serve --port 8080",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@mdi/font": "^7.4.47",
+    "axios": "^0.24.0",
+    "bootstrap": "^4.6.0",
+    "bootstrap-vue": "^2.23.0",
+    "vue": "^3.4.33",
+    "vue-router": "^4.4.0",
+    "vuetify": "^3.6.13-3.7.0-beta.0.0"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.25.1",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "@vue/compiler-sfc": "^3.4.34",
+    "eslint": "^7.32.0",
+    "eslint-plugin-vue": "^7.20.0",
+    "vue-loader": "^17.4.2",
+    "webpack": "^5.93.0"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:vue/vue3-recommended"
+    ],
+    "parserOptions": {
+      "parser": "@babel/eslint-parser"
+    },
+    "rules": {}
+  }
+}
