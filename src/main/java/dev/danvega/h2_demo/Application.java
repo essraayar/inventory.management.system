@@ -1,6 +1,5 @@
 package dev.danvega.h2_demo;
 
-
 import dev.danvega.h2_demo.model.Role;
 import dev.danvega.h2_demo.model.User;
 import dev.danvega.h2_demo.service.UserService;

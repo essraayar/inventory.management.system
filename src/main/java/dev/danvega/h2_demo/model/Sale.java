@@ -27,6 +27,7 @@ public class Sale {
 
     @Column(name = "total_amount")
     private Double totalAmount;
+
 }
 
 /*package dev.danvega.h2_demo.model;

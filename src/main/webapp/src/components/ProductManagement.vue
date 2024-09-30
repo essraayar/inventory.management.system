@@ -50,7 +50,8 @@
             <tr>
               <th scope="col">Ürün Adı</th>
               <th scope="col">Kategori</th>
-              <th scope="col">Fiyat (TL)</th>
+              <th scope="col">Birim Fiyatı (TL)</th>
+              <th scope="col">Stok Adeti</th>
               <th scope="col">İşlemler</th>
             </tr>
           </thead>
@@ -59,6 +60,7 @@
               <td>{{ product.name }}</td>
               <td>{{ product.category }}</td>
               <td>{{ product.price }}</td>
+              <td>{{ product.stockQuantity }}</td>
               <td>
                 <button type="button" class="btn btn-success mr-2" @click="openEditModal(product.id)">
                   <i class="fas fa-edit"></i> Düzenle
@@ -94,8 +96,12 @@
                 <input type="text" class="form-control" id="productCategory" v-model="editedProduct.category" required>
               </div>
               <div class="form-group">
-                <label for="productPrice">Fiyat (TL):</label>
+                <label for="productPrice">Birim Fiyatı (TL):</label>
                 <input type="number" class="form-control" id="productPrice" v-model.number="editedProduct.price" required>
+              </div>
+              <div class="form-group">
+                <label for="productQuantity">Stok Adeti:</label>
+                <input type="number" class="form-control" id="productQuantity" v-model.number="editedProduct.stockQuantity" required>
               </div>
               <button type="submit" class="btn btn-primary">{{ isNewProduct ? 'Ekle' : 'Güncelle' }}</button>
             </form>
@@ -118,7 +124,8 @@ export default {
         id: null,
         name: '',
         category: '',
-        price: 0
+        price: 0,
+        stockQuantity: 0
       },
       isNewProduct: false,
       isModalVisible: false, // Modal'ın görünürlüğünü kontrol eder
@@ -161,7 +168,7 @@ export default {
     },
     openAddModal() {
       this.isNewProduct = true;
-      this.editedProduct = { id: null, name: '', category: '', price: 0 };
+      this.editedProduct = { id: null, name: '', category: '', price: 0, quantity: 0};
       this.isModalVisible = true;
     },
     openEditModal(productId) {
@@ -173,7 +180,7 @@ export default {
       }
     },
     closeEditModal() {
-      this.editedProduct = { id: null, name: '', category: '', price: 0 };
+      this.editedProduct = { id: null, name: '', category: '', price: 0, quantity: 0};
       this.isModalVisible = false;
     },
     async updateProduct() {
@@ -187,9 +194,11 @@ export default {
           const index = this.products.findIndex(prod => prod.id === this.editedProduct.id);
           if (index !== -1) {
             this.products[index] = response.data;
+             console.log('Ürün Güncellendi:', response.data);
           }
         }
         this.closeEditModal();
+        this.fetchProducts();
       } catch (error) {
         console.error('Error updating product:', error);
       }

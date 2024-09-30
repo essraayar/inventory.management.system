@@ -1,11 +1,9 @@
 package dev.danvega.h2_demo.controller;
 
 
-import dev.danvega.h2_demo.model.Dto.UserDto;
 import dev.danvega.h2_demo.model.User;
 import dev.danvega.h2_demo.repository.UserRepository;
 import dev.danvega.h2_demo.service.UserService;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;

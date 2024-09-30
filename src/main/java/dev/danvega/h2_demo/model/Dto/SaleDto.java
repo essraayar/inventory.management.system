@@ -1,5 +1,6 @@
 package dev.danvega.h2_demo.model.Dto;
 
+import dev.danvega.h2_demo.model.Sale;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -14,27 +15,6 @@ public class SaleDto {
     private Double totalAmount;
 }
 
-
-/*
-package dev.danvega.h2_demo.model.Dto;
-
-import lombok.Data;
-
-import java.time.LocalDateTime;
-
-@Data
-public class SaleDto {
-
-    private Long id;
-    private ProductDto product;
-    private LocalDateTime saleDate;
-    private Integer quantity;
-    private Double totalAmount;
-    private CustomerDto customer;
-
-}
-
-*/
 
 
 /*

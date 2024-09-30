@@ -11,6 +11,8 @@ public interface SaleService {
     void deleteSale(Long id);
 
     List<ProductDto> getProductList();
+    List<String> getAllCustomerEmails();
+
 }
 
 

@@ -6,7 +6,19 @@
         <i class="fa fa-solid fa-envelope"></i>
         Müşteri E-posta
       </label>
-      <input type="email" v-model="formData.customerEmail" required class="form-control">
+      <!-- Müşteri e-posta alanına tıklandığında e-postaları yükleyeceğiz -->
+      <input
+        type="email"
+        v-model="formData.customerEmail"
+        required
+        class="form-control"
+        @focus="loadCustomerEmails"
+        list="emailList"
+      >
+      <!-- Dropdown menüsü -->
+      <datalist id="emailList">
+        <option v-for="email in customerEmails" :key="email" :value="email"></option>
+      </datalist>
 
       <label>
         <i class="fa fa-solid fa-calendar"></i>
@@ -57,10 +69,20 @@ export default {
         productName: '',
         rating: '5',
         msg: ''
-      }
+      },
+      customerEmails: [] // Müşteri e-postalarını tutacağımız dizi
     };
   },
   methods: {
+    async loadCustomerEmails() {
+      try {
+        // API'den e-posta verilerini alıyoruz
+        const response = await axios.get('http://10.20.4.88:8080/api/sales/get-all-customer-emails');
+        this.customerEmails = response.data; // E-posta listesini dolduruyoruz
+      } catch (error) {
+        console.error('E-posta yükleme hatası:', error);
+      }
+    },
     async submitForm() {
       try {
         await axios.post('http://10.20.4.88:8080/api/feedbacks/add-feedback', this.formData);
@@ -84,9 +106,9 @@ export default {
 <style scoped>
 .form-box {
   background: #fff;
-  width: 40%; /* Formun genişliğini %50 olarak ayarladık */
-  max-width: 600px; /* Formun maksimum genişliğini 600px olarak sınırlandırdık */
-  margin: 10% auto; /* Formu sayfanın ortasına yerleştirdik */
+  width: 40%;
+  max-width: 600px;
+  margin: 10% auto;
   padding: 1rem;
   border-radius: 1rem;
   box-shadow: 0 0 20px rgba(0, 0, 255, 0.2);

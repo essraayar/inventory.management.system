@@ -1,5 +1,8 @@
 package dev.danvega.h2_demo.service.implementation;
 import dev.danvega.h2_demo.model.Dto.FeedbackDto;
+import dev.danvega.h2_demo.model.Dto.ProductDto;
+import dev.danvega.h2_demo.model.Dto.SaleDto;
+import dev.danvega.h2_demo.repository.SaleRepository;
 import dev.danvega.h2_demo.service.FeedbackService;
 import dev.danvega.h2_demo.model.Feedback;
 import dev.danvega.h2_demo.repository.FeedbackRepository;
@@ -14,6 +17,9 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     @Autowired
     private FeedbackRepository feedbackRepository;
+
+    @Autowired
+    private SaleRepository saleRepository;
 
     @Override
     public List<FeedbackDto> getAllFeedbacks() {

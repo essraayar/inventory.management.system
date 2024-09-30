@@ -57,10 +57,11 @@
                 </select>
               </div>
               <div class="form-group">
-                <label for="customerSelect">Müşteri E-posta:</label>
-                <select class="form-control" id="customerSelect" v-model="editedSale.customerEmail">
-                  <option v-for="email in customerEmails" :key="email" :value="email">{{ email }}</option>
-                </select>
+                <label for="customerEmail">Müşteri E-posta:</label>
+                <input type="email" class="form-control" id="customerEmail" v-model="editedSale.customerEmail" list="emailOptions">
+                <datalist id="emailOptions">
+                  <option v-for="email in customerEmails" :key="email" :value="email"></option>
+                </datalist>
               </div>
               <div class="form-group">
                 <label for="saleDate">Satış Tarihi:</label>
@@ -101,8 +102,22 @@ export default {
   },
   created() {
     this.fetchSales();
-    //this.fetchProducts();
+    this.fetchProducts();
   },
+   watch: {
+      'editedSale.quantity': function(newQuantity) {
+        const selectedProduct = this.products.find(p => p.id === this.editedSale.productId);
+        if (selectedProduct) {
+          this.editedSale.totalAmount = newQuantity * selectedProduct.price;
+        }
+      },
+      'editedSale.productId': function(newProductId) {
+        const selectedProduct = this.products.find(p => p.id === newProductId);
+        if (selectedProduct) {
+          this.editedSale.totalAmount = this.editedSale.quantity * selectedProduct.price;
+        }
+      }
+    },
   methods: {
     async fetchSales() {
       try {
@@ -130,7 +145,7 @@ export default {
     getCustomerEmail(customerEmail) {
       // E-posta adreslerini manuel olarak eşleştir
       const email = this.customerEmails.find(email => email === customerEmail);
-      return email || 'Bilgi Yok';
+      return email || customerEmail;
     },
     openAddModal() {
       this.isNewSale = true;

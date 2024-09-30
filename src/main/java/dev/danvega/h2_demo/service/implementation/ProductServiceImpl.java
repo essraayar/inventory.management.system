@@ -1,4 +1,5 @@
 package dev.danvega.h2_demo.service.implementation;
+
 import dev.danvega.h2_demo.model.Dto.ProductDto;
 import dev.danvega.h2_demo.model.Product;
 import dev.danvega.h2_demo.repository.ProductRepository;
@@ -12,7 +13,6 @@ import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-
 
     private ProductRepository productRepository;
 
@@ -31,6 +31,7 @@ public class ProductServiceImpl implements ProductService {
             dto.setName(product.getProductName());
             dto.setCategory(product.getCategory());
             dto.setPrice(product.getPrice());
+            dto.setStockQuantity(product.getStockQuantity()); // Stok adeti eklendi
             productDtos.add(dto);
         }
         return productDtos;
@@ -42,6 +43,7 @@ public class ProductServiceImpl implements ProductService {
         product.setProductName(productDto.getName());
         product.setCategory(productDto.getCategory());
         product.setPrice(productDto.getPrice());
+        product.setStockQuantity(productDto.getStockQuantity()); // Stok adeti
         Product savedProduct = productRepository.save(product);
 
         ProductDto dto = new ProductDto();
@@ -49,6 +51,7 @@ public class ProductServiceImpl implements ProductService {
         dto.setName(savedProduct.getProductName());
         dto.setCategory(savedProduct.getCategory());
         dto.setPrice(savedProduct.getPrice());
+        dto.setStockQuantity(savedProduct.getStockQuantity()); // Stok adeti eklendi
         return dto;
     }
 
@@ -60,6 +63,7 @@ public class ProductServiceImpl implements ProductService {
             product.setProductName(productDto.getName());
             product.setCategory(productDto.getCategory());
             product.setPrice(productDto.getPrice());
+            product.setStockQuantity(productDto.getStockQuantity()); // Stok adeti güncellemesi
             Product updatedProduct = productRepository.save(product);
 
             ProductDto dto = new ProductDto();
@@ -67,6 +71,7 @@ public class ProductServiceImpl implements ProductService {
             dto.setName(updatedProduct.getProductName());
             dto.setCategory(updatedProduct.getCategory());
             dto.setPrice(updatedProduct.getPrice());
+            dto.setStockQuantity(updatedProduct.getStockQuantity()); // Stok adeti eklendi
             return dto;
         } else {
             // Handle case where product with given id does not exist
